@@ -2,11 +2,17 @@ import ReactDOMServer from "react-dom/server";
 import type { Request, Response } from "express";
 import App from "./src/App";
 import Html from "./src/Html";
+import { Router } from "wouter";
+import staticLocationHook from "wouter/static-location";
 
 export function render(req: Request, res: Response, bootstrap: string) {
+  const url = req.originalUrl;
+
   const { pipe } = ReactDOMServer.renderToPipeableStream(
     <Html>
-      <App />
+      <Router hook={staticLocationHook(url)}>
+        <App />
+      </Router>
     </Html>,
     {
       onShellReady() {

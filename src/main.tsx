@@ -2,11 +2,15 @@ import App from "./App";
 import ReactDOM from "react-dom/client";
 import React from "react";
 import "./index.css";
+import { Router } from "wouter";
+import useLocationHook from "wouter/use-location";
 
 const root = document.getElementById("root") as HTMLElement;
 ReactDOM.hydrateRoot(
   root,
   <React.StrictMode>
-    <App />
+    <Router hook={useLocationHook}>
+      <App />
+    </Router>
   </React.StrictMode>
 );

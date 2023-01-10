@@ -19,7 +19,8 @@ export default defineConfig(({ command }) => {
 });
 
 const devConfig = {
-  plugins: [react(), cssInjectedByJsPlugin()],
+  // plugins: [react(), cssInjectedByJsPlugin()],
+  plugins: [react()],
 
   build: {
     rollupOptions: {

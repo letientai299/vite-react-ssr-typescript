@@ -14,10 +14,12 @@ specifiers:
   typescript: ^4.9.3
   vite: ^4.0.0
   vite-plugin-css-injected-by-js: 2.2.0
+  wouter: 2.9.0
 
 dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  wouter: 2.9.0_react@18.2.0
 
 devDependencies:
   '@types/express': 4.17.15
@@ -1281,3 +1283,11 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /wouter/2.9.0_react@18.2.0:
+    resolution: {integrity: sha512-cGi9miU5jgwNaybj4sfzY9ZVhU8EwFsncmi2yDvVbS2pL/yz8ZpAMMiELHr4j8w2NLStgI/ltqDluYvBwPhYoQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+    dev: false

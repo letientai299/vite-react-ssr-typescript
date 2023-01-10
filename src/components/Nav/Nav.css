@@ -1,0 +1,19 @@
+.navbar {
+  width: 100%;
+  display: flex;
+  place-content: center;
+}
+
+.navlink {
+  flex-grow: 1;
+  padding: 4px;
+  color: cyan;
+  font-weight: lighter;
+  min-width: 100px;
+  max-width: 200px;
+}
+
+.navlink.active {
+  font-weight: bolder;
+  border-bottom: 1px solid cyan;
+}
