@@ -1,6 +1,5 @@
-import { defineConfig } from "vite";
+import { defineConfig, normalizePath, Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
@@ -31,3 +30,35 @@ const devConfig = {
     },
   },
 };
+
+function idmod(): Plugin {
+  let root: string;
+
+  const simplify = (id: string) => {
+    return {
+      shortId: id.replace(root, ""),
+      isTSX: id.endsWith(".tsx"),
+    };
+  };
+
+  return {
+    name: "mod-id",
+
+    config(config) {
+      root = normalizePath(config.root + "/");
+    },
+
+    transform(src, id) {
+      const { shortId, isTSX } = simplify(id);
+      if (!isTSX) {
+        return;
+      }
+
+      console.log("[mod-id]", shortId);
+      src += `\n
+export const MOD_ID = '${shortId}';
+      `;
+      return { code: src };
+    },
+  };
+}

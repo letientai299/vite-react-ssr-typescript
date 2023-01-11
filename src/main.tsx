@@ -4,6 +4,7 @@ import React from "react";
 import "./index.css";
 import { Router } from "wouter";
 import useLocationHook from "wouter/use-location";
+import "vite/modulepreload-polyfill";
 
 const root = document.getElementById("root") as HTMLElement;
 ReactDOM.hydrateRoot(
