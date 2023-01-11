@@ -5,11 +5,16 @@ import Html from "./src/Html";
 import { Router } from "wouter";
 import staticLocationHook from "wouter/static-location";
 
-export function render(req: Request, res: Response, bootstrap: string) {
+export function render(
+  req: Request,
+  res: Response,
+  entryClient: string,
+  entryCss?: string
+) {
   const url = req.originalUrl;
 
   const { pipe } = ReactDOMServer.renderToPipeableStream(
-    <Html>
+    <Html cssPath={entryCss}>
       <Router hook={staticLocationHook(url)}>
         <App />
       </Router>
@@ -20,7 +25,7 @@ export function render(req: Request, res: Response, bootstrap: string) {
         res.setHeader("content-type", "text/html");
         pipe(res);
       },
-      bootstrapModules: [bootstrap],
+      bootstrapModules: [entryClient],
     }
   );
 }

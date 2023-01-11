@@ -1,7 +1,7 @@
 import App from "./App";
 import ReactDOM from "react-dom/client";
 import React from "react";
-import "./index.css";
+import "./main.css";
 import { Router } from "wouter";
 import useLocationHook from "wouter/use-location";
 import "vite/modulepreload-polyfill";

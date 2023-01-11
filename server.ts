@@ -1,6 +1,18 @@
 import express, { Express, Request, Response } from "express";
 import fs from "fs";
 
+function findOneAssets(substrings: string[]): string {
+  const includeAlls = (s: string) => {
+    return (
+      substrings.filter((sub) => s.includes(sub)).length == substrings.length
+    );
+  };
+
+  return (
+    "/assets/" + fs.readdirSync("./dist/client/assets").filter(includeAlls)
+  );
+}
+
 async function configProd(app: Express) {
   app.use(
     (await import("serve-static")).default("./dist/client", {
@@ -10,13 +22,10 @@ async function configProd(app: Express) {
 
   // @ts-ignore
   const render = (await import("./dist/server/entry-server.js")).render;
-  // replace bootstrap script with compiled scripts
-  const bootstrap =
-    "/assets/" +
-    fs
-      .readdirSync("./dist/client/assets")
-      .filter((fn: string) => fn.includes("main") && fn.endsWith(".js"))[0];
-  app.use("*", (req, res) => render(req, res, bootstrap));
+  const entryClient = findOneAssets(["main", "js"]);
+  const entryCss = findOneAssets(["main", "css"]);
+
+  app.use("*", (req, res) => render(req, res, entryClient, entryCss));
   return app;
 }
 
@@ -40,7 +49,7 @@ async function configDev(app: Express) {
     // so that editing the entry-server file take effect without restart server.
     try {
       const render = (await vite.ssrLoadModule("./entry-server.tsx")).render;
-      render(req, res, `/src/main.tsx`);
+      render(req, res, `/src/main.tsx`, `/src/main.css`);
     } catch (err) {
       const e = err as Error;
       vite.ssrFixStacktrace(e);

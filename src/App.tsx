@@ -48,7 +48,6 @@ function App() {
     <main className="App">
       <Nav routes={routes} />
       <Switch>{routes.map(makeRoute)}</Switch>
-      <p>Mod ID: {MOD_ID}</p>
     </main>
   );
 }
