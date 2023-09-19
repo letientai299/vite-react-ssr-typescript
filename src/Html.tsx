@@ -25,9 +25,8 @@ function Html({ children }: HtmlProps) {
       <head>
         <meta charSet="UTF-8" />
         {viteScripts}
-        <link rel="shortcut icon" href="/feld.svg" type="image/x-icon" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>FELD</title>
+        <title>some title</title>
       </head>
       <body>
         <div id="root">{children}</div>
