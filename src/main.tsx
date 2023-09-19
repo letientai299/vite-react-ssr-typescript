@@ -1,12 +1,14 @@
 import App from "./App";
-import ReactDOM from "react-dom/client";
 import React from "react";
 import "./index.css";
+import {hydrateRoot} from "react-dom/client";
+import Html from "./Html";
 
-const root = document.getElementById("root") as HTMLElement;
-ReactDOM.hydrateRoot(
-  root,
+hydrateRoot(
+  document,
   <React.StrictMode>
-    <App />
+    <Html>
+        <App />
+    </Html>
   </React.StrictMode>
 );
